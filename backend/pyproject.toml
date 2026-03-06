@@ -5,10 +5,10 @@ description = ""
 authors = [{ name = "Bétrisey Arnaud", email = "dev@arnabetr.ch" }]
 readme = "README.md"
 requires-python = ">=3.14"
-dependencies = []
+dependencies = ["django (>=6.0.3,<7.0.0)"]
 
 [tool.poetry]
-packages = [{ include = "backend", from = "src" }]
+package-mode = false
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
