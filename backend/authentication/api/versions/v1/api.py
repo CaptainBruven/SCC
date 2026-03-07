@@ -20,7 +20,7 @@ class AuthenticationController:
 
         if user is not None:
             refresh = RefreshToken.for_user(user)
-            access = refresh.access_token
+            access = AccessToken.for_user(user)
 
             response_data = LoginResponseSchema(
                 access=str(access),
@@ -65,7 +65,8 @@ class AuthenticationController:
             if not get_user_model().objects.filter(id=user).exists():
                 return HTTPStatus.NOT_FOUND, response_error(code=ErrorCodes.USER_NOT_FOUND)
 
-            access = refresh.access_token
+            user_obj = get_user_model().objects.get(id=user)
+            access = AccessToken.for_user(user_obj)
 
             response_data = LoginResponseSchema(access=str(access))
 
