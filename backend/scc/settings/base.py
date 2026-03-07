@@ -51,6 +51,14 @@ INSTALLED_APPS = [
     "ninja_jwt",
     "ninja_jwt.token_blacklist",
     "authentication",
+    "core",
+    "universe",
+    "lore",
+    "manufacturer",
+    "component",
+    "vehicle",
+    "equipment",
+    "economy",
 ]
 
 MIDDLEWARE = [
