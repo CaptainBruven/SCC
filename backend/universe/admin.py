@@ -1,4 +1,5 @@
 from django.contrib import admin
+from unfold.admin import ModelAdmin, TabularInline
 
 from universe.models import (
     AsteroidBelt,
@@ -11,24 +12,24 @@ from universe.models import (
 )
 
 
-class StarInline(admin.TabularInline):
+class StarInline(TabularInline):
     model = Star
     extra = 0
 
 
-class CelestialBodyInline(admin.TabularInline):
+class CelestialBodyInline(TabularInline):
     model = CelestialBody
     extra = 0
     fields = ("name", "body_type", "status")
 
 
-class AsteroidBeltInline(admin.TabularInline):
+class AsteroidBeltInline(TabularInline):
     model = AsteroidBelt
     extra = 0
 
 
 @admin.register(StarSystem)
-class StarSystemAdmin(admin.ModelAdmin):
+class StarSystemAdmin(ModelAdmin):
     list_display = ("name", "code", "status", "affiliation", "threat_level")
     list_filter = ("status", "affiliation", "threat_level")
     search_fields = ("name", "code", "slug")
@@ -37,19 +38,19 @@ class StarSystemAdmin(admin.ModelAdmin):
 
 
 @admin.register(Star)
-class StarAdmin(admin.ModelAdmin):
+class StarAdmin(ModelAdmin):
     list_display = ("name", "star_system", "star_type", "spectral_class")
     list_filter = ("star_type",)
     search_fields = ("name", "slug")
     prepopulated_fields = {"slug": ("name",)}
 
 
-class CelestialBodyBiomeInline(admin.TabularInline):
+class CelestialBodyBiomeInline(TabularInline):
     model = CelestialBodyBiome
     extra = 0
 
 
-class LocationInline(admin.TabularInline):
+class LocationInline(TabularInline):
     model = Location
     fk_name = "celestial_body"
     extra = 0
@@ -57,7 +58,7 @@ class LocationInline(admin.TabularInline):
 
 
 @admin.register(CelestialBody)
-class CelestialBodyAdmin(admin.ModelAdmin):
+class CelestialBodyAdmin(ModelAdmin):
     list_display = ("name", "star_system", "body_type", "habitable", "status")
     list_filter = ("body_type", "status", "habitable", "star_system")
     search_fields = ("name", "slug")
@@ -66,13 +67,13 @@ class CelestialBodyAdmin(admin.ModelAdmin):
 
 
 @admin.register(CelestialBodyBiome)
-class CelestialBodyBiomeAdmin(admin.ModelAdmin):
+class CelestialBodyBiomeAdmin(ModelAdmin):
     list_display = ("name", "celestial_body")
     search_fields = ("name",)
 
 
 @admin.register(Location)
-class LocationAdmin(admin.ModelAdmin):
+class LocationAdmin(ModelAdmin):
     list_display = ("name", "star_system", "celestial_body", "location_type", "status")
     list_filter = ("location_type", "status", "star_system", "is_armistice_zone")
     search_fields = ("name", "slug")
@@ -80,7 +81,7 @@ class LocationAdmin(admin.ModelAdmin):
 
 
 @admin.register(JumpPoint)
-class JumpPointAdmin(admin.ModelAdmin):
+class JumpPointAdmin(ModelAdmin):
     list_display = ("name", "source_system", "destination_system", "size", "status")
     list_filter = ("size", "status", "is_bidirectional")
     search_fields = ("name", "slug")
@@ -88,7 +89,7 @@ class JumpPointAdmin(admin.ModelAdmin):
 
 
 @admin.register(AsteroidBelt)
-class AsteroidBeltAdmin(admin.ModelAdmin):
+class AsteroidBeltAdmin(ModelAdmin):
     list_display = ("name", "star_system", "mineable", "status")
     list_filter = ("status", "mineable")
     search_fields = ("name", "slug")

@@ -1,10 +1,11 @@
 from django.contrib import admin
+from unfold.admin import ModelAdmin
 
 from manufacturer.models import Manufacturer
 
 
 @admin.register(Manufacturer)
-class ManufacturerAdmin(admin.ModelAdmin):
+class ManufacturerAdmin(ModelAdmin):
     list_display = ("name", "code", "manufacturer_type", "species", "is_alien")
     list_filter = ("manufacturer_type", "is_alien", "species")
     search_fields = ("name", "code", "slug")

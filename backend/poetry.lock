@@ -366,6 +366,21 @@ django = "*"
 typing-extensions = "*"
 
 [[package]]
+name = "django-unfold"
+version = "0.83.1"
+description = "Modern Django admin theme"
+optional = false
+python-versions = "<4.0,>=3.11"
+groups = ["main"]
+files = [
+    {file = "django_unfold-0.83.1-py3-none-any.whl", hash = "sha256:233cca8f7d9d173518597ce4dbafb0167f3075b556d7fb2b97e44217a1c6ba0f"},
+    {file = "django_unfold-0.83.1.tar.gz", hash = "sha256:af3f9710496d172f0079343d1ba3128528da6d8ef4a57b070efcfc6456d8ed2b"},
+]
+
+[package.dependencies]
+django = ">=4.2"
+
+[[package]]
 name = "injector"
 version = "0.24.0"
 description = "Injector - Python dependency injection framework, inspired by Guice"
@@ -770,4 +785,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.14,<4"
-content-hash = "7869fd63e542525cf2e7a686efeb1d223054bc10077e353fa5767ee3f5d52cd6"
+content-hash = "daaa26f4ca4abc344f7e316c9105774aac4124c9bc4c24a7802fc6c13a8e25fc"

@@ -1,4 +1,5 @@
 from django.contrib import admin
+from unfold.admin import ModelAdmin, TabularInline
 
 from economy.models import (
     Commodity,
@@ -11,7 +12,7 @@ from economy.models import (
 
 
 @admin.register(CommodityCategory)
-class CommodityCategoryAdmin(admin.ModelAdmin):
+class CommodityCategoryAdmin(ModelAdmin):
     list_display = ("name", "slug", "parent_category")
     list_filter = ("parent_category",)
     search_fields = ("name", "slug")
@@ -19,7 +20,7 @@ class CommodityCategoryAdmin(admin.ModelAdmin):
 
 
 @admin.register(Commodity)
-class CommodityAdmin(admin.ModelAdmin):
+class CommodityAdmin(ModelAdmin):
     list_display = ("name", "commodity_category", "legality", "base_price_auec", "is_mineable", "is_tradeable")
     list_filter = ("commodity_category", "legality", "is_mineable", "is_tradeable")
     search_fields = ("name", "slug")
@@ -27,27 +28,27 @@ class CommodityAdmin(admin.ModelAdmin):
 
 
 @admin.register(CommodityPriceEntry)
-class CommodityPriceEntryAdmin(admin.ModelAdmin):
+class CommodityPriceEntryAdmin(ModelAdmin):
     list_display = ("commodity", "location", "transaction_type", "price_per_unit", "recorded_at")
     list_filter = ("transaction_type", "commodity", "location")
     search_fields = ("commodity__name", "location__name")
 
 
 @admin.register(MiningResource)
-class MiningResourceAdmin(admin.ModelAdmin):
+class MiningResourceAdmin(ModelAdmin):
     list_display = ("name", "commodity", "instability", "resistance")
     search_fields = ("name", "slug")
     prepopulated_fields = {"slug": ("name",)}
 
 
-class ShopInventoryInline(admin.TabularInline):
+class ShopInventoryInline(TabularInline):
     model = ShopInventory
     extra = 0
     fields = ("content_type", "object_id", "price_auec", "is_available")
 
 
 @admin.register(Shop)
-class ShopAdmin(admin.ModelAdmin):
+class ShopAdmin(ModelAdmin):
     list_display = ("name", "location", "shop_type")
     list_filter = ("shop_type", "location")
     search_fields = ("name", "slug")
@@ -56,6 +57,6 @@ class ShopAdmin(admin.ModelAdmin):
 
 
 @admin.register(ShopInventory)
-class ShopInventoryAdmin(admin.ModelAdmin):
+class ShopInventoryAdmin(ModelAdmin):
     list_display = ("shop", "content_type", "object_id", "price_auec", "is_available")
     list_filter = ("is_available", "content_type", "shop")

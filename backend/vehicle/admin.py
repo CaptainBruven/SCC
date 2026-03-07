@@ -1,4 +1,5 @@
 from django.contrib import admin
+from unfold.admin import ModelAdmin, TabularInline
 
 from vehicle.models import (
     Vehicle,
@@ -12,43 +13,43 @@ from vehicle.models import (
 )
 
 
-class VehicleHardpointInline(admin.TabularInline):
+class VehicleHardpointInline(TabularInline):
     model = VehicleHardpoint
     extra = 0
     fields = ("hardpoint_name", "hardpoint_type", "size", "quantity", "mount_type", "default_component")
 
 
-class VehicleVariantInline(admin.TabularInline):
+class VehicleVariantInline(TabularInline):
     model = VehicleVariant
     fk_name = "base_vehicle"
     extra = 0
 
 
-class VehiclePaintInline(admin.TabularInline):
+class VehiclePaintInline(TabularInline):
     model = VehiclePaint
     extra = 0
     fields = ("name", "source", "price_usd", "price_auec")
 
 
-class VehicleTagAssignmentInline(admin.TabularInline):
+class VehicleTagAssignmentInline(TabularInline):
     model = VehicleTagAssignment
     extra = 0
 
 
-class VehicleLoanerEntryInline(admin.TabularInline):
+class VehicleLoanerEntryInline(TabularInline):
     model = VehicleLoanerEntry
     fk_name = "pledged_vehicle"
     extra = 0
 
 
-class VehicleImageInline(admin.TabularInline):
+class VehicleImageInline(TabularInline):
     model = VehicleImage
     extra = 0
     fields = ("image_url", "image_type", "caption", "is_primary", "sort_order")
 
 
 @admin.register(Vehicle)
-class VehicleAdmin(admin.ModelAdmin):
+class VehicleAdmin(ModelAdmin):
     list_display = ("name", "manufacturer", "vehicle_type", "size_class", "status", "pledge_price_usd")
     list_filter = ("vehicle_type", "size_class", "status", "manufacturer", "pledge_availability", "is_alien")
     search_fields = ("name", "slug", "series")
@@ -64,48 +65,48 @@ class VehicleAdmin(admin.ModelAdmin):
 
 
 @admin.register(VehicleHardpoint)
-class VehicleHardpointAdmin(admin.ModelAdmin):
+class VehicleHardpointAdmin(ModelAdmin):
     list_display = ("vehicle", "hardpoint_name", "hardpoint_type", "size", "quantity", "mount_type")
     list_filter = ("hardpoint_type", "mount_type")
     search_fields = ("hardpoint_name", "vehicle__name")
 
 
 @admin.register(VehicleVariant)
-class VehicleVariantAdmin(admin.ModelAdmin):
+class VehicleVariantAdmin(ModelAdmin):
     list_display = ("base_vehicle", "variant_vehicle", "relationship_type")
     list_filter = ("relationship_type",)
     search_fields = ("base_vehicle__name", "variant_vehicle__name")
 
 
 @admin.register(VehiclePaint)
-class VehiclePaintAdmin(admin.ModelAdmin):
+class VehiclePaintAdmin(ModelAdmin):
     list_display = ("name", "vehicle", "source", "price_usd", "price_auec")
     list_filter = ("source",)
     search_fields = ("name", "vehicle__name")
 
 
 @admin.register(VehicleTag)
-class VehicleTagAdmin(admin.ModelAdmin):
+class VehicleTagAdmin(ModelAdmin):
     list_display = ("name", "category")
     list_filter = ("category",)
     search_fields = ("name",)
 
 
 @admin.register(VehicleTagAssignment)
-class VehicleTagAssignmentAdmin(admin.ModelAdmin):
+class VehicleTagAssignmentAdmin(ModelAdmin):
     list_display = ("vehicle", "tag")
     list_filter = ("tag",)
 
 
 @admin.register(VehicleLoanerEntry)
-class VehicleLoanerEntryAdmin(admin.ModelAdmin):
+class VehicleLoanerEntryAdmin(ModelAdmin):
     list_display = ("pledged_vehicle", "loaner_vehicle", "loaner_context")
     list_filter = ("loaner_context",)
     search_fields = ("pledged_vehicle__name", "loaner_vehicle__name")
 
 
 @admin.register(VehicleImage)
-class VehicleImageAdmin(admin.ModelAdmin):
+class VehicleImageAdmin(ModelAdmin):
     list_display = ("vehicle", "image_type", "caption", "is_primary", "sort_order")
     list_filter = ("image_type", "is_primary")
     search_fields = ("vehicle__name", "caption")

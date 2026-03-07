@@ -1,4 +1,5 @@
 from django.contrib import admin
+from unfold.admin import ModelAdmin, TabularInline
 
 from equipment.models import (
     ArmorPiece,
@@ -12,13 +13,13 @@ from equipment.models import (
 )
 
 
-class WeaponAttachmentCompatibilityInline(admin.TabularInline):
+class WeaponAttachmentCompatibilityInline(TabularInline):
     model = WeaponAttachmentCompatibility
     extra = 0
 
 
 @admin.register(PersonalWeapon)
-class PersonalWeaponAdmin(admin.ModelAdmin):
+class PersonalWeaponAdmin(ModelAdmin):
     list_display = ("name", "manufacturer", "weapon_class", "damage_type", "rarity", "status", "price_auec")
     list_filter = ("weapon_class", "damage_type", "rarity", "status", "manufacturer")
     search_fields = ("name", "slug")
@@ -27,7 +28,7 @@ class PersonalWeaponAdmin(admin.ModelAdmin):
 
 
 @admin.register(WeaponAttachment)
-class WeaponAttachmentAdmin(admin.ModelAdmin):
+class WeaponAttachmentAdmin(ModelAdmin):
     list_display = ("name", "manufacturer", "attachment_type", "price_auec")
     list_filter = ("attachment_type", "manufacturer")
     search_fields = ("name", "slug")
@@ -35,20 +36,20 @@ class WeaponAttachmentAdmin(admin.ModelAdmin):
 
 
 @admin.register(WeaponAttachmentCompatibility)
-class WeaponAttachmentCompatibilityAdmin(admin.ModelAdmin):
+class WeaponAttachmentCompatibilityAdmin(ModelAdmin):
     list_display = ("weapon", "attachment", "slot_type")
     list_filter = ("slot_type",)
     search_fields = ("weapon__name", "attachment__name")
 
 
-class ArmorPieceInline(admin.TabularInline):
+class ArmorPieceInline(TabularInline):
     model = ArmorPiece
     extra = 0
     fields = ("name", "slot", "armor_type", "price_auec")
 
 
 @admin.register(PersonalArmor)
-class PersonalArmorAdmin(admin.ModelAdmin):
+class PersonalArmorAdmin(ModelAdmin):
     list_display = ("name", "manufacturer", "armor_type", "armor_category", "rarity", "price_auec")
     list_filter = ("armor_type", "armor_category", "rarity", "manufacturer")
     search_fields = ("name", "slug")
@@ -57,7 +58,7 @@ class PersonalArmorAdmin(admin.ModelAdmin):
 
 
 @admin.register(ArmorPiece)
-class ArmorPieceAdmin(admin.ModelAdmin):
+class ArmorPieceAdmin(ModelAdmin):
     list_display = ("name", "armor_set", "manufacturer", "slot", "armor_type", "price_auec")
     list_filter = ("slot", "armor_type", "manufacturer")
     search_fields = ("name", "slug")
@@ -65,7 +66,7 @@ class ArmorPieceAdmin(admin.ModelAdmin):
 
 
 @admin.register(Undersuit)
-class UndersuitAdmin(admin.ModelAdmin):
+class UndersuitAdmin(ModelAdmin):
     list_display = ("name", "manufacturer", "has_eva_capability", "inventory_slots", "price_auec")
     list_filter = ("has_eva_capability", "manufacturer")
     search_fields = ("name", "slug")
@@ -73,7 +74,7 @@ class UndersuitAdmin(admin.ModelAdmin):
 
 
 @admin.register(Clothing)
-class ClothingAdmin(admin.ModelAdmin):
+class ClothingAdmin(ModelAdmin):
     list_display = ("name", "manufacturer", "clothing_type", "price_auec")
     list_filter = ("clothing_type", "manufacturer")
     search_fields = ("name", "slug")
@@ -81,7 +82,7 @@ class ClothingAdmin(admin.ModelAdmin):
 
 
 @admin.register(Tool)
-class ToolAdmin(admin.ModelAdmin):
+class ToolAdmin(ModelAdmin):
     list_display = ("name", "manufacturer", "tool_type", "price_auec")
     list_filter = ("tool_type", "manufacturer")
     search_fields = ("name", "slug")
