@@ -1,0 +1,29 @@
+{
+  "folders": [
+    {
+      "name": "Backend",
+      "path": "./backend"
+    },
+    {
+      "name": "Root",
+      "path": "./"
+    }
+  ],
+  "settings": {
+    "python.defaultInterpreterPath": "backend/.venv/bin/python",
+    "python.analysis.extraPaths": [
+      "backend",
+      "backend/.venv/lib/python3.14/site-packages"
+    ],
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.typeCheckingMode": "basic",
+    "[python]": {
+      "editor.defaultFormatter": "charliermarsh.ruff",
+      "editor.formatOnSave": true,
+      "editor.codeActionsOnSave": {
+        "source.fixAll": "explicit",
+        "source.organizeImports": "explicit"
+      }
+    }
+  }
+}

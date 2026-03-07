@@ -1,0 +1,12 @@
+{
+  "venvPath": ".",
+  "venv": ".venv",
+  "pythonVersion": "3.14",
+  "pythonPlatform": "Linux",
+  "include": [
+    "."
+  ],
+  "extraPaths": [
+    ".venv/lib/python3.14/site-packages"
+  ]
+}
