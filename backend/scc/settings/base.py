@@ -149,3 +149,13 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/6.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Unfold Admin
+UNFOLD = {
+    "SITE_TITLE": "SCC Admin",
+    "SIDEBAR": {
+        "show_search": True,
+        "show_all_applications": False,
+        "navigation": "scc.utils.admin.get_navigation",
+    },
+}
